@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]/[action]")]
     [ApiController]
     public class ProgramingLanguageController : BaseController
     {
@@ -22,28 +22,28 @@ namespace WebAPI.Controllers
             return Ok(programingLanguageGetByIdDto);
         }
 
-        [HttpPost("/Add")]
+        [HttpPost]
         public async Task<IActionResult> Add([FromBody] CreateProgramingLanguageCommand createProgramingLanguageCommand)
         {
             CreateProgramingLanguageDto result = await Mediator.Send(createProgramingLanguageCommand);
             return Created("", result);
         }
 
-        [HttpPost("/Update")]
+        [HttpPost]
         public async Task<IActionResult> Update([FromBody] UpdateProgramingLanguageCommand updateProgramingLanguageCommand)
         {
             UpdateProgramingLanguageDto updateProgramingLanguageDto = await Mediator.Send(updateProgramingLanguageCommand);
             return Ok(updateProgramingLanguageDto);
         }
 
-        [HttpPost("/Delete")]
+        [HttpPost]
         public async Task<IActionResult> Delete([FromBody] DeleteProgramingLanguageCommand deleteProgramingLanguageCommand)
         {
             DeleteProgramingLanguageDto deleteProgramingLanguageDto = await Mediator.Send(deleteProgramingLanguageCommand);
             return Ok(deleteProgramingLanguageDto);
         }
 
-        [HttpGet("/Getlist")]
+        [HttpGet]
         public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
         {
             GetListProgramingLanguageQuery getListProgramingLanguageQuery = new() { PageRequest= pageRequest };

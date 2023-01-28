@@ -36,7 +36,7 @@ namespace Kodlama.Io.Devs.Application.Features.Auths.Commands.Register
 
             public async Task<RegisteredDto> Handle(RegisterCommand request, CancellationToken cancellationToken)
             {
-                _authBusinessRules.EmailCanNotBeDuplicatedWhenRegistered(request.UserForRegisterDto.Email);
+                await _authBusinessRules.EmailCanNotBeDuplicatedWhenRegistered(request.UserForRegisterDto.Email);
                 byte[] passwordHash, passwordSalt;
                 HashingHelper.CreatePasswordHash(request.UserForRegisterDto.Password, out passwordHash, out passwordSalt);
 

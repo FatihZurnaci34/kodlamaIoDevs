@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]/[action]")]
     [ApiController]
     public class TechnologyController : BaseController
     {
@@ -27,7 +27,7 @@ namespace WebAPI.Controllers
             return Ok(technologyGetByIdDto);
         }
 
-        [HttpGet("/Getlistt")]
+        [HttpGet]
         public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
         {
             GetListTechnologyQuery getListTechnologyQuery = new() { PageRequest = pageRequest };
@@ -35,21 +35,21 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
-        [HttpPost("/Addd")]
+        [HttpPost]
         public async Task<IActionResult> Add([FromBody] CreateTechnologyCommand createTechnologyCommand)
         {
             CreateTechnologyDto result = await Mediator.Send(createTechnologyCommand);
             return Created("", result);
         }
 
-        [HttpPost("/Updatee")]
+        [HttpPost]
         public async Task<IActionResult> Update([FromBody] UpdateTechnologyCommand updateTechnologyCommand)
         {
             UpdateTechnologyDto result = await Mediator.Send(updateTechnologyCommand);
             return Ok(result);
         }
 
-        [HttpPost("/Deletee")]
+        [HttpPost]
         public async Task<IActionResult> Delete([FromBody] DeleteTechnologyCommand deleteTechnology)
         {
             DeleteTechnologyDto result = await Mediator.Send(deleteTechnology);

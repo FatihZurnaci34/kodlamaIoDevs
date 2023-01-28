@@ -12,7 +12,6 @@
 		<Folder Include="Features\Technologies\Constants\" />
 		<Folder Include="Features\UserOperationClaims\Constants\" />
 		<Folder Include="Features\UserOperationClaims\Rules\" />
-		<Folder Include="Features\UserOperationClaims\Queries\" />
 	</ItemGroup>
 
 	<ItemGroup>

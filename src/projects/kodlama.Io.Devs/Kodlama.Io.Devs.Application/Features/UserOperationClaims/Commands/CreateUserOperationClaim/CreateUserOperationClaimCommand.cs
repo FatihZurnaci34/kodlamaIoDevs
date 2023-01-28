@@ -14,7 +14,7 @@ namespace Kodlama.Io.Devs.Application.Features.UserOperationClaims.Commands.Crea
     public class CreateUserOperationClaimCommand : IRequest<CreateUserOperationClaimDto>
     {
         public int UserId { get; set; }
-        public int OperationId { get; set; }
+        public int OperationClaimId { get; set; }
 
         public class CreateUserOperationClaimCommandHandler : IRequestHandler<CreateUserOperationClaimCommand, CreateUserOperationClaimDto>
         {

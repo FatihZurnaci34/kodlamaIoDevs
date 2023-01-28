@@ -33,6 +33,7 @@ namespace Kodlama.Io.Devs.Application.Features.Technologies.Profiles
             CreateMap<Technology, TechnologyListDto>()
                 .ForMember(t => t.ProgramingLanguageName, opt => opt.MapFrom(t => t.ProgramingLanguage.Name)).ReverseMap();
             CreateMap<IPaginate<Technology>, TechnologyListModel>().ReverseMap();
+
         }
     }
 }
