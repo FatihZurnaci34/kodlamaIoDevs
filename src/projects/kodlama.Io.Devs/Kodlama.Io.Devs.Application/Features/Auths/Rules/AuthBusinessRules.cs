@@ -1,5 +1,6 @@
 ﻿using Core.CrossCuttingConcerns.Exceptions;
 using Core.Security.Entities;
+using Core.Security.Hashing;
 using Kodlama.Io.Devs.Application.Services.Repositories;
 using System;
 using System.Collections.Generic;
@@ -24,5 +25,19 @@ namespace Kodlama.Io.Devs.Application.Features.Auths.Rules
             if (user != null) throw new BusinessException("Mail Already Exists");
   
         }
+
+        public async Task CheckIfEmailIsCorrect(string email)
+        {
+            var user = await _userRepository.GetAsync(u => u.Email == email);
+            if(user==null)
+                throw new BusinessException($"{email} is not a valid email");
+        }
+        public void CheckIfPasswordIsCorrect(string requestPassword, byte[] userPasswordHash, byte[] userPasswordSalt) 
+        {
+
+            if (!HashingHelper.VerifyPasswordHash(requestPassword, userPasswordHash, userPasswordSalt))
+                throw new BusinessException("Şifre Yanlış");
+        }
+
     }
 }
