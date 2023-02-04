@@ -11,12 +11,21 @@ namespace Kodlama.Io.Devs.Application.Services.AuthService
         private readonly IUserOperationClaimRepository _userOperationClaimRepository;
         private readonly ITokenHelper _tokenHelper;
         private readonly IRefreshTokenRepository _refreshTokenRepository;
+        private readonly IOperationClaimRepository _operationClaimRepository;
 
-        public AuthManager(IUserOperationClaimRepository userOperationClaimRepository, ITokenHelper tokenHelper, IRefreshTokenRepository refreshTokenRepository)
+        public AuthManager(IUserOperationClaimRepository userOperationClaimRepository, ITokenHelper tokenHelper, IRefreshTokenRepository refreshTokenRepository, IOperationClaimRepository operationClaimRepository)
         {
             _userOperationClaimRepository = userOperationClaimRepository;
             _tokenHelper = tokenHelper;
             _refreshTokenRepository = refreshTokenRepository;
+            _operationClaimRepository = operationClaimRepository;
+        }
+
+        public async Task<UserOperationClaim> CreateAndAddUserClaim(User user)
+        {
+            OperationClaim? operationClaim = await _operationClaimRepository.GetAsync(o => o.Name == "User");
+            UserOperationClaim? userOperationClaim = new() { UserId = user.Id, OperationClaimId = operationClaim.Id };
+            return await _userOperationClaimRepository.AddAsync(userOperationClaim);
         }
 
         public async Task<RefreshToken> AddRefreshToken(RefreshToken refreshToken)

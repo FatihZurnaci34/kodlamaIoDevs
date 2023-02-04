@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.Security.Entities;
 using Kodlama.Io.Devs.Application.Features.UserOperationClaims.Dtos;
 using Kodlama.Io.Devs.Application.Services.Repositories;
@@ -11,9 +12,10 @@ using System.Threading.Tasks;
 
 namespace Kodlama.Io.Devs.Application.Features.UserOperationClaims.Commands.DeleteUserOperationClaim
 {
-    public class DeleteUserOperationClaimCommand:IRequest<DeleteUserOperationClaimDto>
+    public class DeleteUserOperationClaimCommand:IRequest<DeleteUserOperationClaimDto>,ISecuredRequest
     {
         public int Id { get; set; }
+        public string[] Roles { get; } = { "Admin" };
 
         public class DeleteUserOperationClaimCommandHandler : IRequestHandler<DeleteUserOperationClaimCommand, DeleteUserOperationClaimDto>
         {

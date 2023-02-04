@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.Security.Entities;
 using Kodlama.Io.Devs.Application.Features.OperationClaims.Dtos;
 using Kodlama.Io.Devs.Application.Services.Repositories;
@@ -11,10 +12,11 @@ using System.Threading.Tasks;
 
 namespace Kodlama.Io.Devs.Application.Features.OperationClaims.Commands.UpdateOperationClaim
 {
-    public class UpdateOperationClaimCommand:IRequest<UpdateOperationClaimDto>
+    public class UpdateOperationClaimCommand:IRequest<UpdateOperationClaimDto>,ISecuredRequest
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string[] Roles { get; } = { "Admin" };
 
         public class UpdateOperationClaimCommandHandler : IRequestHandler<UpdateOperationClaimCommand, UpdateOperationClaimDto>
         {

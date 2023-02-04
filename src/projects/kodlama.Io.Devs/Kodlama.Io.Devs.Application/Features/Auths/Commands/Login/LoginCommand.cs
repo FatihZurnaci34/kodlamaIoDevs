@@ -1,4 +1,5 @@
-﻿using Core.Security.Dtos;
+﻿using Core.Application.Pipelines.Authorization;
+using Core.Security.Dtos;
 using Kodlama.Io.Devs.Application.Features.Auths.Dtos;
 using Kodlama.Io.Devs.Application.Features.Auths.Rules;
 using Kodlama.Io.Devs.Application.Services.AuthService;

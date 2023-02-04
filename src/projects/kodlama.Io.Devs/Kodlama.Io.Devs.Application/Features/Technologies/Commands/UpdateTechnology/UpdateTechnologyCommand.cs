@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Kodlama.Io.Devs.Application.Features.Technologies.Dtos;
 using Kodlama.Io.Devs.Application.Features.Technologies.Rules;
 using Kodlama.Io.Devs.Application.Services.Repositories;
@@ -12,11 +13,12 @@ using System.Threading.Tasks;
 
 namespace Kodlama.Io.Devs.Application.Features.Technologies.Commands.UpdateTechnology
 {
-    public class UpdateTechnologyCommand:IRequest<UpdateTechnologyDto>
+    public class UpdateTechnologyCommand:IRequest<UpdateTechnologyDto>,ISecuredRequest
     {
         public int Id { get; set; }
         public int ProgramingLanguageId { get; set; }
         public string Name { get; set; }
+        public string[] Roles { get; } = { "Admin" };
 
         public class UpdateTechnologyCommandHandler : IRequestHandler<UpdateTechnologyCommand, UpdateTechnologyDto>
         {

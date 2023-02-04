@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Kodlama.Io.Devs.Application.Features.Technologies.Dtos;
 using Kodlama.Io.Devs.Application.Services.Repositories;
 using Kodlama.Io.Devs.Domain.Entities;
@@ -11,9 +12,10 @@ using System.Threading.Tasks;
 
 namespace Kodlama.Io.Devs.Application.Features.Technologies.Commands.DeleteTechnology
 {
-    public class DeleteTechnologyCommand:IRequest<DeleteTechnologyDto>
+    public class DeleteTechnologyCommand:IRequest<DeleteTechnologyDto>,ISecuredRequest
     {
         public int Id { get; set; }
+        public string[] Roles { get; } = { "Admin" };
 
 
         public class DeleteTechnologyCommandHandler : IRequestHandler<DeleteTechnologyCommand, DeleteTechnologyDto>

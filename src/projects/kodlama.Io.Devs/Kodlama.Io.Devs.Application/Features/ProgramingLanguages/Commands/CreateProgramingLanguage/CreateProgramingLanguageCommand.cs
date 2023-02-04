@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Kodlama.Io.Devs.Application.Features.ProgramingLanguages.Dtos;
 using Kodlama.Io.Devs.Application.Features.ProgramingLanguages.Rules;
 using Kodlama.Io.Devs.Application.Services.Repositories;
@@ -12,9 +13,10 @@ using System.Threading.Tasks;
 
 namespace Kodlama.Io.Devs.Application.Features.ProgramingLanguages.Commands.CreateProgramingLanguage
 {
-    public class CreateProgramingLanguageCommand : IRequest<CreateProgramingLanguageDto>
+    public class CreateProgramingLanguageCommand : IRequest<CreateProgramingLanguageDto>,ISecuredRequest
     {
         public string Name { get; set; }
+        public string[] Roles { get; } ={"Admin"};
 
         public class CreateProgramingLanguageHandler : IRequestHandler<CreateProgramingLanguageCommand, CreateProgramingLanguageDto>
         {

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.Security.Entities;
 using Kodlama.Io.Devs.Application.Features.UserOperationClaims.Dtos;
 using Kodlama.Io.Devs.Application.Services.Repositories;
@@ -11,10 +12,11 @@ using System.Threading.Tasks;
 
 namespace Kodlama.Io.Devs.Application.Features.UserOperationClaims.Commands.CreateUserOperationClaim
 {
-    public class CreateUserOperationClaimCommand : IRequest<CreateUserOperationClaimDto>
+    public class CreateUserOperationClaimCommand : IRequest<CreateUserOperationClaimDto>,ISecuredRequest
     {
         public int UserId { get; set; }
         public int OperationClaimId { get; set; }
+        public string[] Roles { get; } = { "Admin" };
 
         public class CreateUserOperationClaimCommandHandler : IRequestHandler<CreateUserOperationClaimCommand, CreateUserOperationClaimDto>
         {

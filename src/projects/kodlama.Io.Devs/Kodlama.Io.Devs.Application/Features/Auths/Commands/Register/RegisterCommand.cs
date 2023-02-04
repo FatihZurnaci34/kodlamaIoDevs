@@ -50,6 +50,7 @@ namespace Kodlama.Io.Devs.Application.Features.Auths.Commands.Register
                     Status = true
                 };
                 User createdUser = await _userRepository.AddAsync(newUser);
+                await _authService.CreateAndAddUserClaim(createdUser);
 
                 AccessToken createdAccessToken = await _authService.CreateAccessToken(createdUser);
                 RefreshToken createdRefreshToken = await _authService.CreateRefreshToken(createdUser, request.IpAddress);
